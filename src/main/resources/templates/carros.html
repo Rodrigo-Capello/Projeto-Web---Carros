@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Catálogo de Carros</title>
+</head>
+<body>
+
+<h1>Catálogo de Carros</h1>
+
+<a th:href="@{/carros/novo}">Cadastrar novo carro</a>
+
+<br><br>
+
+<table border="1">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Marca</th>
+        <th>Modelo</th>
+        <th>Ano</th>
+        <th>Cor</th>
+        <th>Preço</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr th:each="carro : ${carros}">
+        <td th:text="${carro.id}"></td>
+        <td th:text="${carro.marca}"></td>
+        <td th:text="${carro.modelo}"></td>
+        <td th:text="${carro.ano}"></td>
+        <td th:text="${carro.cor}"></td>
+        <td th:text="${carro.preco}"></td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>
