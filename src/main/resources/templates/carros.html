@@ -21,6 +21,7 @@
         <th>Ano</th>
         <th>Cor</th>
         <th>Preço</th>
+        <th>Ações</th>
     </tr>
     </thead>
 
@@ -32,6 +33,13 @@
         <td th:text="${carro.ano}"></td>
         <td th:text="${carro.cor}"></td>
         <td th:text="${carro.preco}"></td>
+        <td>
+            <a th:href="@{/carros/editar/{id}(id=${carro.id})}">Editar</a>
+            <form th:action="@{/carros/excluir/{id}(id=${carro.id})}" method="post">
+                <button type="submit">Excluir</button>
+            </form>
+        </td>
+
     </tr>
     </tbody>
 </table>

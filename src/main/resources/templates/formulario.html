@@ -10,6 +10,8 @@
 
 <form th:action="@{/carros/salvar}" th:object="${carro}" method="post">
 
+    <input type="hidden" th:field="*{id}">
+
     <label>Marca:</label>
     <input type="text" th:field="*{marca}">
     <br><br>
