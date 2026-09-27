@@ -7,6 +7,7 @@
 <body>
 
 <h1>Catálogo de Carros</h1>
+<p th:if="${sucesso}" th:text="${sucesso}"></p>
 
 <a th:href="@{/carros/novo}">Cadastrar novo carro</a>
 
