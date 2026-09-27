@@ -2,6 +2,7 @@ package catalogo_carros.service;
 
 import catalogo_carros.model.Carro;
 import catalogo_carros.repository.CarroRepository;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -34,5 +35,14 @@ public class CarroService {
 
     public List<Carro> buscarPorModelo(String modelo) {
         return carroRepository.findByModeloIgnoreCase(modelo);
+    }
+
+    public List<Carro> listarOrdenadoPorPreco(String direcao) { Sort sort;
+        if (direcao.equalsIgnoreCase("desc")) {
+            sort = Sort.by("preco").descending();
+        } else {
+            sort = Sort.by("preco").ascending();
+        }
+        return carroRepository.findAll(sort);
     }
 }

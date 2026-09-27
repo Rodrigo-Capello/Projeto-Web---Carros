@@ -4,10 +4,7 @@ import catalogo_carros.model.Carro;
 import catalogo_carros.service.CarroService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class CarroController {
@@ -48,4 +45,17 @@ public class CarroController {
         carroService.excluir(id);
         return "redirect:/carros";
     }
+
+    @GetMapping("/carros/pesquisar")
+    public String pesquisarCarros(@RequestParam String modelo, Model model) {
+        model.addAttribute("carros", carroService.buscarPorModelo(modelo));
+        return "carros";
+    }
+
+    @GetMapping("/carros/ordenar")
+    public String ordenarCarros(@RequestParam String direcao, Model model) {
+        model.addAttribute("carros", carroService.listarOrdenadoPorPreco(direcao));
+        return "carros";
+    }
+
 }

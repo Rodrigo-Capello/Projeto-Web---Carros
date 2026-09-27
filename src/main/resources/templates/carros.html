@@ -10,6 +10,22 @@
 
 <a th:href="@{/carros/novo}">Cadastrar novo carro</a>
 
+<form th:action="@{/carros/pesquisar}" method="get">
+    <label>Pesquisar por modelo:</label>
+    <input type="text" name="modelo">
+    <button type="submit">Pesquisar</button>
+    <a th:href="@{/carros}">Mostrar todos</a>
+</form>
+
+<p>Ordenar por preço:</p>
+
+<a th:href="@{/carros/ordenar(direcao='asc')}">Menor preço</a>
+<a th:href="@{/carros/ordenar(direcao='desc')}">Maior preço</a>
+
+<br><br>
+
+<br>
+
 <br><br>
 
 <table border="1">
