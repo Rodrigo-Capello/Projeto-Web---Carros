@@ -1,9 +1,6 @@
 package catalogo_carros.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
+import jakarta.persistence.*;
 
 @Entity
 public class Carro {
@@ -14,16 +11,20 @@ public class Carro {
     private String marca;
     private String modelo;
     private Integer ano;
+    @Column(unique = true)
+    private String placa;
     private String cor;
     private Double preco;
     
     public Carro() {
     }
-    
-    public Carro(String marca, String modelo, Integer ano, String cor, Double preco) {
+
+
+    public Carro(String marca, String modelo, Integer ano,String placa, String cor, Double preco) {
         this.marca = marca;
         this.modelo = modelo;
         this.ano = ano;
+        this.placa = placa;
         this.cor = cor;
         this.preco = preco;
     }
@@ -58,6 +59,14 @@ public class Carro {
 
     public void setAno(Integer ano) {
         this.ano = ano;
+    }
+
+    public String getPlaca() {
+        return placa;
+    }
+
+    public void setPlaca(String placa) {
+        this.placa = placa;
     }
 
     public String getCor() {

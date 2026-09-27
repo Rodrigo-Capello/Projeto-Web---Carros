@@ -8,6 +8,8 @@
 
 <h1>Cadastrar Carro</h1>
 
+<p th:if="${erro}" th:text="${erro}"></p>
+
 <form th:action="@{/carros/salvar}" th:object="${carro}" method="post">
 
     <input type="hidden" th:field="*{id}">
@@ -22,6 +24,10 @@
 
     <label>Ano:</label>
     <input type="number" th:field="*{ano}">
+    <br><br>
+
+    <label>Placa:</label>
+    <input type="text" th:field="*{placa}">
     <br><br>
 
     <label>Cor:</label>

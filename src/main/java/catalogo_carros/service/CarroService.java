@@ -45,4 +45,19 @@ public class CarroService {
         }
         return carroRepository.findAll(sort);
     }
+
+    public boolean placaJaExiste(String placa) {
+        return carroRepository.existsByPlacaIgnoreCase(placa);
+    }
+
+    public boolean placaPertenceAOutroCarro(String placa, Long id) {
+        Optional<Carro> carroComPlaca = carroRepository.findByPlacaIgnoreCase(placa);
+        if (carroComPlaca.isEmpty()) {
+            return false;
+        }
+        if (id == null) {
+            return true;
+        }
+        return !carroComPlaca.get().getId().equals(id);
+    }
 }

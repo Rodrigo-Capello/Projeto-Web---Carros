@@ -28,7 +28,13 @@ public class CarroController {
     }
 
     @PostMapping("/carros/salvar")
-    public String salvarCarro(@ModelAttribute Carro carro) {
+    public String salvarCarro(@ModelAttribute Carro carro, Model model) {
+
+        if (carroService.placaPertenceAOutroCarro(carro.getPlaca(), carro.getId())) {
+            model.addAttribute("erro", "Já existe um carro registrado com essa placa.");
+            return "formulario";
+        }
+
         carroService.salvar(carro);
         return "redirect:/carros";
     }
