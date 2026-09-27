@@ -2,8 +2,10 @@ package catalogo_carros.controller;
 
 import catalogo_carros.model.Carro;
 import catalogo_carros.service.CarroService;
+import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
@@ -28,7 +30,11 @@ public class CarroController {
     }
 
     @PostMapping("/carros/salvar")
-    public String salvarCarro(@ModelAttribute Carro carro, Model model) {
+    public String salvarCarro(@Valid @ModelAttribute Carro carro, BindingResult result, Model model) {
+
+        if (result.hasErrors()) {
+            return "formulario";
+        }
 
         if (carroService.placaPertenceAOutroCarro(carro.getPlaca(), carro.getId())) {
             model.addAttribute("erro", "Já existe um carro registrado com essa placa.");

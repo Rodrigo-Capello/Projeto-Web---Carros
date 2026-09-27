@@ -16,18 +16,26 @@
 
     <label>Marca:</label>
     <input type="text" th:field="*{marca}">
+    <span th:if="${#fields.hasErrors('marca')}"
+          th:errors="*{marca}"></span>
     <br><br>
 
     <label>Modelo:</label>
     <input type="text" th:field="*{modelo}">
+    <span th:if="${#fields.hasErrors('modelo')}"
+          th:errors="*{modelo}"></span>
     <br><br>
 
     <label>Ano:</label>
     <input type="number" th:field="*{ano}">
+    <span th:if="${#fields.hasErrors('ano')}"
+          th:errors="*{ano}"></span>
     <br><br>
 
     <label>Placa:</label>
     <input type="text" th:field="*{placa}">
+    <span th:if="${#fields.hasErrors('placa')}"
+          th:errors="*{placa}"></span>
     <br><br>
 
     <label>Cor:</label>
@@ -36,6 +44,8 @@
 
     <label>Preço:</label>
     <input type="number" step="0.01" th:field="*{preco}">
+    <span th:if="${#fields.hasErrors('preco')}"
+          th:errors="*{preco}"></span>
     <br><br>
 
     <button type="submit">Salvar</button>

@@ -1,6 +1,8 @@
 package catalogo_carros.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 public class Carro {
@@ -8,12 +10,22 @@ public class Carro {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank(message = "Este campo é obrigatório")
     private String marca;
+
+    @NotBlank(message = "Este campo é obrigatório")
     private String modelo;
+
+    @NotNull(message = "Este campo é obrigatório")
     private Integer ano;
+
     @Column(unique = true)
+    @NotBlank(message = "Este campo é obrigatório")
     private String placa;
+
     private String cor;
+
+    @NotNull(message = "Este campo é obrigatório")
     private Double preco;
     
     public Carro() {
