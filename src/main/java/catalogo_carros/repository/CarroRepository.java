@@ -9,7 +9,5 @@ public interface CarroRepository extends JpaRepository<Carro, Long> {
 
     List<Carro> findByModeloIgnoreCase(String modelo);
 
-    boolean existsByPlacaIgnoreCase(String placa);
-
     Optional<Carro> findByPlacaIgnoreCase(String placa);
 }

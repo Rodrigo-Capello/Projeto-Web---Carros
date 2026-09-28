@@ -37,17 +37,15 @@ public class CarroService {
         return carroRepository.findByModeloIgnoreCase(modelo);
     }
 
-    public List<Carro> listarOrdenadoPorPreco(String direcao) { Sort sort;
+    public List<Carro> listarOrdenadoPorPreco(String direcao) {
+        Sort sort;
+
         if (direcao.equalsIgnoreCase("desc")) {
             sort = Sort.by("preco").descending();
         } else {
             sort = Sort.by("preco").ascending();
         }
         return carroRepository.findAll(sort);
-    }
-
-    public boolean placaJaExiste(String placa) {
-        return carroRepository.existsByPlacaIgnoreCase(placa);
     }
 
     public boolean placaPertenceAOutroCarro(String placa, Long id) {

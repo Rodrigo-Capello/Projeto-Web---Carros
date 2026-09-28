@@ -10,126 +10,131 @@
         .tabela > :not(caption) > * > * {
             background-color: rgba(242, 242, 242, 0.7);
         }
+
         .btn {
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
         }
+
         .btn:hover {
             opacity: 0.9;
         }
+
         .botao-azul {
             background-color: #003cb3;
             color: white;
         }
+
         .botao-azul:hover {
             background-color: #003cb3;
             color: white;
         }
+
         body {
             font-family: "Verdana", sans-serif;
         }
     </style>
 </head>
 <body style="background-color: #b3cce6; min-height: 100vh;">
-<div class="container mt-5 text-center">
+    <div class="container mt-5 text-center">
 
-    <h1 class="mb-5 fw-medium">Catálogo de Carros</h1>
-    <div th:if="${sucesso}"
-         class="alert alert-success mx-auto fw-bold"
-         style="max-width: 400px;"
-         th:text="${sucesso}">
-    </div>
-
-    <div class="row mb-5">
-
-        <div class="col">
-            <h3>Cadastrar</h3>
-
-            <a th:href="@{/carros/novo}" class="btn botao-azul">                                                       <!-- CADASTRAR -->
-                Cadastrar novo carro
-            </a>
+        <h1 class="mb-5 fw-medium">Catálogo de Carros</h1>
+        <div th:if="${sucesso}"
+             class="alert alert-success mx-auto fw-bold"
+             style="max-width: 400px;"
+             th:text="${sucesso}">
         </div>
 
-        <div class="col">
-            <h3>Pesquisar</h3>
+        <div class="row mb-5">
 
-            <form th:action="@{/carros/pesquisar}" method="get">
+            <div class="col">
+                <h3>Cadastrar</h3>
 
-                <div class="d-flex justify-content-center gap-3">
-                    <input type="text" name="modelo" class="form-control" style="max-width: 150px;">                    <!-- PESQUISAR -->
-                    <button type="submit" class="btn botao-azul btn-sm align-self-center"
-                            style="padding-top: 2px; padding-bottom: 2px;">
-                        Pesquisar
-                    </button>
-                </div>
-
-                <div class="mt-3">
-                    <a th:href="@{/carros}" class="btn btn-outline-secondary btn-sm">                                   <!-- MOSTRAR TODOS -->
-                        Mostrar todos
-                    </a>
-                </div>
-
-            </form>
-        </div>
-
-        <div class="col">
-            <h3>Ordenar</h3>                                                                                            <!-- ORDENAR -->
-
-            <div class="d-flex justify-content-center gap-3">
-                <a th:href="@{/carros/ordenar(direcao='asc')}" class="btn botao-azul">
-                    Menor preço
-                </a>
-
-                <a th:href="@{/carros/ordenar(direcao='desc')}" class="btn botao-azul">
-                    Maior preço
+                <a th:href="@{/carros/novo}" class="btn botao-azul">
+                    Cadastrar novo carro
                 </a>
             </div>
+
+            <div class="col">
+                <h3>Pesquisar</h3>
+
+                <form th:action="@{/carros/pesquisar}" method="get">
+
+                    <div class="d-flex justify-content-center gap-3">
+                        <input type="text" name="modelo" class="form-control" style="max-width: 150px;">
+                        <button type="submit" class="btn botao-azul btn-sm align-self-center"
+                                style="padding-top: 2px; padding-bottom: 2px;">
+                            Pesquisar
+                        </button>
+                    </div>
+
+                    <div class="mt-3">
+                        <a th:href="@{/carros}" class="btn btn-outline-secondary btn-sm">
+                            Mostrar todos
+                        </a>
+                    </div>
+
+                </form>
+            </div>
+
+            <div class="col">
+                <h3>Ordenar</h3>
+
+                <div class="d-flex justify-content-center gap-3">
+                    <a th:href="@{/carros/ordenar(direcao='asc')}" class="btn botao-azul">
+                        Menor preço
+                    </a>
+
+                    <a th:href="@{/carros/ordenar(direcao='desc')}" class="btn botao-azul">
+                        Maior preço
+                    </a>
+                </div>
+            </div>
+
         </div>
 
+        <div class="table-responsive rounded-4 overflow-hidden">
+            <table class="table table-hover align-middle mx-auto mb-0 tabela">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Marca</th>
+                        <th>Modelo</th>
+                        <th>Ano</th>
+                        <th>Placa</th>
+                        <th>Cor</th>
+                        <th>Preço</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr th:each="carro : ${carros}">
+                        <td th:text="${carro.id}"></td>
+                        <td th:text="${carro.marca}"></td>
+                        <td th:text="${carro.modelo}"></td>
+                        <td th:text="${carro.ano}"></td>
+                        <td class="text-uppercase" th:text="${carro.placa}"></td>
+                        <td th:text="${carro.cor}"></td>
+                        <td th:text="'R$ ' + ${#numbers.formatDecimal(carro.preco, 1, 'POINT', 2, 'COMMA')}"></td>
+                        <td>
+                            <div class="d-flex justify-content-center gap-2">
+                                <a th:href="@{/carros/editar/{id}(id=${carro.id})}"
+                                   class="btn btn-outline-secondary btn-sm">
+                                    Editar
+                                </a>
+
+                                <form th:action="@{/carros/excluir/{id}(id=${carro.id})}"
+                                      method="post">
+                                    <button type="submit" class="btn btn-danger btn-sm">
+                                        Excluir
+                                    </button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
-    <div class="table-responsive rounded-4 overflow-hidden">
-        <table class="table table-hover align-middle mx-auto mb-0 tabela">
-            <thead>
-            <tr>
-                <th>ID</th>
-                <th>Marca</th>
-                <th>Modelo</th>
-                <th>Ano</th>
-                <th>Placa</th>
-                <th>Cor</th>
-                <th>Preço</th>
-                <th>Ações</th>
-            </tr>
-            </thead>
-
-            <tbody>
-            <tr th:each="carro : ${carros}">
-                <td th:text="${carro.id}"></td>
-                <td th:text="${carro.marca}"></td>
-                <td th:text="${carro.modelo}"></td>
-                <td th:text="${carro.ano}"></td>
-                <td class="text-uppercase" th:text="${carro.placa}"></td>
-                <td th:text="${carro.cor}"></td>
-                <td th:text="'R$ ' + ${#numbers.formatDecimal(carro.preco, 1, 'POINT', 2, 'COMMA')}"></td>
-                <td>
-                    <div class="d-flex justify-content-center gap-2">
-                        <a th:href="@{/carros/editar/{id}(id=${carro.id})}"
-                           class="btn btn-outline-secondary btn-sm">
-                            Editar
-                        </a>
-
-                        <form th:action="@{/carros/excluir/{id}(id=${carro.id})}"
-                              method="post">
-                            <button type="submit" class="btn btn-danger btn-sm">
-                                Excluir
-                            </button>
-                        </form>
-                    </div>
-                </td>
-
-            </tr>
-            </tbody>
-        </table>
-    </div>
-</div>
 </body>
 </html>
